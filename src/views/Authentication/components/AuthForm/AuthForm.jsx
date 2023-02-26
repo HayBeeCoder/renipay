@@ -143,8 +143,8 @@ const AuthForm = ({
         <>
           {belowButtonText && (
             <>
-              <div className="h-6" />
-              <p className="text-neutral-02 text-h1 ">{belowButtonText}</p>
+              {/* <div className="h-6" /> */}
+              <p className="text-gray-02 text-h1 ">{belowButtonText}</p>
             </>
           )}
         </>
