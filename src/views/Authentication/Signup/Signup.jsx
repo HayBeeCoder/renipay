@@ -19,16 +19,17 @@ const INFO = [
   {
     type: "Full Name",
     name: "fullName",
+    placeholder: "Enter your name"
   },
   {
     type: "Email",
     name: "email",
-    helperText: "Please enter a valid email address",
+    placeholder: "Please enter a valid email address",
   },
   {
     type: "Password",
     name: "password",
-    helperText: "Passsword must be at least 8 characters long.",
+    placeholder: "Passsword must be at least 8 characters long.",
     // helperText: "Passsword must contain an Upper case, Lower case, a Digit and a Special character and at least 8 characters long."
   },
 ];
@@ -85,13 +86,15 @@ const Signup = () => {
     <AuthForm
       // handleSubmit={formik.handleSubmit}
       isLoading={isCreatingUser}
-      text="Sign Up"
-      title={
+      title="Registration"
+      description={
         <>
-          Get started with <span className="text-primary-05">WAP TV </span>
+          Welcome to Renipay
+          <span class="wave">👋</span>
+          {/* <span className="text-primary-05">WAP TV </span> */}
         </>
       }
-      description="Create your free account"
+      text="Create your free account"
       belowButtonText={
         <>
           {" "}
@@ -117,6 +120,7 @@ const Signup = () => {
             showEyeIcon={item.name === "password"}
             variant="transparent"
             key={index}
+
             // message={
             //   formik.touched[item.name] &&
             //   formik.errors[item.name] && {
