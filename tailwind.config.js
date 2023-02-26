@@ -31,6 +31,7 @@ module.exports = {
       },
 
       success: "#1CCB57",
+      faint: "#FDFDFD",
       pending: "#FAC91C",
       warning: "#FAC91C",
       information: "#65B7E9",
