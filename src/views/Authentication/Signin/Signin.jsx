@@ -56,7 +56,7 @@ const Signin = () => {
       // handleSubmit={formik.handleSubmit}
       
       isLoading={isLoggingUserIn}
-      text="Sign In"
+      text="Login"
       title="Login"
       description={
         <>
