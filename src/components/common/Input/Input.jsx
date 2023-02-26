@@ -36,7 +36,7 @@ const Input = ({
   return (
     <div className={classNames("text-left relative  ", containerClassName)}>
       {labelTitle && (
-        <label className="text-h1 leading-l7 text-[#ECE6E6]">
+        <label className="text-h1 leading-l7 text-primary-01">
           {labelTitle}
         </label>
       )}
@@ -58,11 +58,11 @@ const Input = ({
           // autoComplete={false}
           type={passwordShown ? "password" : "text"}
           className={classNames(
-            " w-full py-[10px] px-4 rounded-[4px] border-[0px]   outline-none   focus:border-[1px] focus:border-neutral-02 placeholder:text-h2 text-[#060606] bg-[#FFF] ",
+            "font-normal w-full py-[10px] px-4 rounded-[8px] border-[1px]   outline-none   focus:border-[1px] border-gray-01 border-opacity-20 focus:border-primary-01  placeholder-gray-01 placeholder:text-h1 placeholder:font-light text-primary-01 bg-[#FFF] ",
             {
               "pr-10": showEyeIcon,
               "pl-14": showSearchIcon,
-              "bg-transparent border-neutral-02 placeholder:text-neutral-02":
+              "bg-transparent border-gray-02 placeholder-gray-02":
                 variant === "transparent",
               "cursor-not-allowed": loading,
               "border-[2px] border-primary-04 ": message?.type === "error",
@@ -73,7 +73,7 @@ const Input = ({
         />
         {showEyeIcon && (
           <span
-            className="w-5 h-5 inline-flex cursor-pointer -translate-x-[calc(100%+10px)] left-full top-1/2  -translate-y-1/2 absolute items-center justify-center text-[#060606] "
+            className="w-5 h-5 inline-flex cursor-pointer -translate-x-[calc(100%+10px)] left-full top-1/2  -translate-y-1/2 absolute items-center justify-center text-gray-02 "
             onClick={togglePasswordVisiblity}
           >
             {!passwordShown ? <EyesClosed /> : <Eyes />}
@@ -81,7 +81,7 @@ const Input = ({
         )}
       </div>
       {message?.type !== "error" && helperText && (
-        <p className={classNames("text-[10px] text-neutral-01 mt-[1px]")}>
+        <p className={classNames("text-[9px] text-primary-01 mt-[1px]")}>
           {helperText}
         </p>
       )}
