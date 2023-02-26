@@ -94,19 +94,23 @@ const Signup = () => {
           {/* <span className="text-primary-05">WAP TV </span> */}
         </>
       }
+     
       text="Create your free account"
       belowButtonText={
         <>
           {" "}
-          Have an account already ?{" "}
+          Already have an account ?{" "}
           <Link to="/auth/signin">
-            <span className="text-primary-05 hover:underline hover:underline-offset-2">
+            <span className="text-primary-01 hover:underline hover:underline-offset-2">
               Sign in
             </span>
           </Link>
         </>
       }
     >
+      <p className="text-h2 text-left text-gray-02 font-normal">
+      Enter your details
+      </p>
       {INFO.map((item, index) => (
         <>
           <Input

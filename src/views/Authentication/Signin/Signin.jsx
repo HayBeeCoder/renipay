@@ -11,10 +11,12 @@ const INFO = [
   {
     type: "Email",
     name: "email",
+    placeholder:"Enter your email address"
   },
   {
     type: "Password",
     name: "password",
+    placeholder: "Enter your password"
   },
 ];
 
@@ -55,8 +57,12 @@ const Signin = () => {
       
       isLoading={isLoggingUserIn}
       text="Sign In"
-      title="Welcome back!"
-      description="Log in to your account"
+      title="Login"
+      description={
+        <>
+        Welcome back!  <span class="wave">👋</span>
+        </>
+      }
       belowButtonText={
         <>
           {" "}
@@ -70,6 +76,9 @@ const Signin = () => {
         </>
       }
     >
+       <p className="text-h2 text-left text-gray-02 font-normal">
+Login to continue
+      </p>
       {INFO.map((item, index) => (
         <Input
           // onChange={formik.handleChange}
