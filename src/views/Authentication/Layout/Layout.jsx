@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <section className="w-screen h-screen  relative grid md:flex flex-wrap grid-cols-6  overflow-hidden">
       <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-between overflow-hidden">
-        <p className="text-faint font-black md:text-[100px] text-[120px] text-left md:opacity-80 opacity-5">Renipay</p>
+        <p className="text-faint font-black md:text-[100px] text-[120px] text-left  opacity-5">Renipay</p>
         <p className="text-faint font-black md:text-[100px] text-[120px] text-right -ml-12 md:opacity-50 opacity-5">Renipay</p>
       </div>
      
