@@ -25,6 +25,10 @@ module.exports = {
       primary: {
         "01": "#131212",
       },
+      gray: {
+        "01": "#898888",
+        "02": "#626161"
+      },
 
       success: "#1CCB57",
       pending: "#FAC91C",
@@ -50,7 +54,7 @@ module.exports = {
       h7: "44px",
     },
     fontFamily: {
-      roboto: ["Roboto", "sans-serif"],
+       poppins: ["Poppins", "sans-serif"],
     },
 
     lineHeight: {
