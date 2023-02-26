@@ -1,5 +1,5 @@
 import Button from "@app/components/common/Button";
-// import Logo from "@app/components/common/Logo";
+import RenipayLogo from "@app/components/Icon/icons/RenipayLogo";
 // import { Facebook, Google } from "@app/components/Icon/icons";
 import Layout from "@app/views/Authentication/Layout";
 import classNames from "classnames";
@@ -24,6 +24,7 @@ const AuthForm = ({
   isLoading,
   children,
   handleSubmit,
+  description2,
   // handleSocialIconClick,
   description,
   icon: Icon,
@@ -40,10 +41,10 @@ const AuthForm = ({
     () =>
       nonAuth
         ? (props) => (
-            <section className="flex items-center h-full w-full">
-              {props.children}
-            </section>
-          )
+          <section className="flex items-center h-full w-full">
+            {props.children}
+          </section>
+        )
         : Layout,
     [nonAuth]
   );
@@ -51,32 +52,51 @@ const AuthForm = ({
     <HtmlTag>
       <form
         onSubmit={handleSubmit}
-        className="bg-[#060606] py-7 px-5 rounded-[4px] space-y-1 w-[389px] md:w-[95vw] md:max-w-[400px] mx-auto text-center"
+        className="py-7 px-5 rounded-[4px] space-y-1 w-[389px] md:w-[95vw] md:max-w-[400px] mx-auto text-center"
       >
-        {/* <Logo
-          className={classNames("ml-0", {
-            "md:hidden": nonAuth,
-          })}
-          hide={false}
-        /> */}
+
+        <div className="flex justify-center">
+
+          <span className=" aspect-square">
+            <RenipayLogo
+              className={classNames("ml-0 ", {
+                "md:hidden": nonAuth,
+              })}
+              hide={false}
+            />
+          </span>
+        </div>
+
 
         {Icon && (
-          <div className="text-[#ffffff]  flex justify-around text-center self-center mb-8 mt-4">
+          <div className="text-primary-01 flex justify-around text-center self-center mb-8 mt-4">
             <Icon className="w-20 h-20" />
           </div>
         )}
-        <p className="typography-semibold-28px -mb-2 text-[#fff]">{title}</p>
+        <p className="typography-semibold-28px b-1 text-primary-01">{title}</p>
 
         {description && (
           <p
             className={classNames(
-              "typography-normal-14px text-[12px]  text-[#ECE6E6]",
+              "typography-normal-14px text-[12px]  text-primary-01",
               {
                 // "pt-10 ": !showSocials && !isReset,
               }
             )}
           >
             {description}
+          </p>
+        )}
+        {description2 && (
+          <p
+            className={classNames(
+              "typography-normal-14px text-[12px]  text-primary-01 text-left",
+              {
+                // "pt-10 ": !showSocials && !isReset,
+              }
+            )}
+          >
+            {description2}
           </p>
         )}
         <div className="h-8 w-full" />
@@ -115,6 +135,7 @@ const AuthForm = ({
             className="w-full "
             type="submit"
             disabled={disableButton}
+             size="large"
           >
             {text}
           </Button>
