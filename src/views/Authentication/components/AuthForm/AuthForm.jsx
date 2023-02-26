@@ -73,7 +73,7 @@ const AuthForm = ({
             <Icon className="w-20 h-20" />
           </div>
         )}
-        <p className="typography-semibold-28px b-1 text-primary-01">{title}</p>
+        <p className="typography-semibold-28px font-semibold b-1 text-primary-01">{title}</p>
 
         {description && (
           <p
