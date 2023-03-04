@@ -41,10 +41,10 @@ const AuthForm = ({
     () =>
       nonAuth
         ? (props) => (
-          <section className="flex items-center h-full w-full">
-            {props.children}
-          </section>
-        )
+            <section className="flex items-center h-full w-full">
+              {props.children}
+            </section>
+          )
         : Layout,
     [nonAuth]
   );
@@ -54,26 +54,25 @@ const AuthForm = ({
         onSubmit={handleSubmit}
         className="py-7 px-5 rounded-[4px] space-y-1 w-[389px] md:w-[95vw] md:max-w-[400px] mx-auto text-center"
       >
-
         <div className="flex justify-center">
-
           <span className=" aspect-square">
             <RenipayLogo
               className={classNames("ml-0 ", {
                 "md:hidden": nonAuth,
               })}
-              hide={false}
+              // hide={false}
             />
           </span>
         </div>
-
 
         {Icon && (
           <div className="text-primary-01 flex justify-around text-center self-center mb-8 mt-4">
             <Icon className="w-20 h-20" />
           </div>
         )}
-        <p className="typography-semibold-28px font-semibold b-1 text-primary-01">{title}</p>
+        <p className="typography-semibold-28px font-semibold b-1 text-primary-01">
+          {title}
+        </p>
 
         {description && (
           <p
@@ -135,7 +134,7 @@ const AuthForm = ({
             className="w-full "
             type="submit"
             disabled={disableButton}
-             size="large"
+            size="large"
           >
             {text}
           </Button>

@@ -1,66 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthForm from "../components/AuthForm";
 import Input from "@app/components/common/Input";
-// import * as Yup from "yup";
+import * as Yup from "yup";
 // import { useFormik } from "formik";
 import { REGEX_EMAIL } from "@app/constants";
-import { Link } from "react-router-dom";
-// import { useAuthContext } from "@app/utils/contexts.js/AuthProvider";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { logUserIN } from "@app/api/auth";
+import { useAuthContext } from "@app/utils/contexts.js/AuthProvider";
 
 const INFO = [
   {
     type: "Email",
     name: "email",
-    placeholder:"Enter your email address"
+    placeholder: "Enter your email address",
   },
   {
     type: "Password",
     name: "password",
-    placeholder: "Enter your password"
+    placeholder: "Enter your password",
   },
 ];
 
 const Signin = () => {
-  // const { login } = useAuthContext();
+  const navigate = useNavigate();
+  const { login } = useAuthContext();
   const [isLoggingUserIn, setIsLogginUserIn] = useState(false);
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     email: "",
-  //     password: "",
-  //   },
-  //   validationSchema: Yup.object({
-  //     email: Yup.string()
-  //       .trim()
-  //       .matches(REGEX_EMAIL, "Email address is invalid!")
-  //       .required("This field is required!"),
-  //     password: Yup.string()
-  //       .min(8, "Password must be at least 8 characters long!")
-  //       .required("This field is required!"),
-  //     // token: Yup.string().email('Invalid email address').required('Required'),
-  //   }),
-  //   onSubmit: async (values) => {
-  //     setIsLogginUserIn(true);
-  //     try {
-  //       await login(values);
-  //     } catch (error) {
-  //       // "error in Signin Component: ", error;
-  //     }
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .trim()
+        .matches(REGEX_EMAIL, "Email address is invalid!")
+        .required("This field is required!"),
+      password: Yup.string().required("This field is required!"),
+      // token: Yup.string().email('Invalid email address').required('Required'),
+    }),
+    onSubmit: async (values) => {
+      setIsLogginUserIn(true);
+      try {
+        await login(values);
+        navigate("/profile");
+      
+      } catch (error) {
+        // "error in Signin Component: ", error;
+      }
 
-  //     setIsLogginUserIn(false);
-  //   },
-  // });
+      setIsLogginUserIn(false);
+    },
+  });
+
+  useEffect(() => {}, []);
 
   return (
     <AuthForm
-      // handleSubmit={formik.handleSubmit}
-      
+      handleSubmit={formik.handleSubmit}
+
       isLoading={isLoggingUserIn}
       text="Login"
       title="Login"
       description={
         <>
-        Welcome back!  <span class="wave">👋</span>
+          Welcome back! <span class="wave">👋</span>
         </>
       }
       belowButtonText={
@@ -76,28 +81,28 @@ const Signin = () => {
         </>
       }
     >
-       <p className="text-h2 text-left text-gray-02 font-normal">
-Login to continue
+      <p className="text-h2 text-left text-gray-02 font-normal">
+        Login to continue
       </p>
       {INFO.map((item, index) => (
         <Input
-          // onChange={formik.handleChange}
-          // value={formik.values[item.name]}
+          onChange={formik.handleChange}
+          value={formik.values[item.name]}
           name={item.name}
-          // onBlur={formik.handleBlur}
+          onBlur={formik.handleBlur}
           labelTitle={item.type}
           loading={isLoggingUserIn}
           placeholder={item.placeholder || "placeholder"}
           showEyeIcon={item.name === "password"}
           variant="transparent"
           key={index}
-          // message={
-            // formik.touched[item.name] &&
-            // formik.errors[item.name] && {
-            //   type: "error",
-            //   value: formik.errors[item.name],
-            // }
-          // }
+          message={
+          formik.touched[item.name] &&
+          formik.errors[item.name] && {
+            type: "error",
+            value: formik.errors[item.name],
+          }
+          }
         />
       ))}
       <div className="text-right">
