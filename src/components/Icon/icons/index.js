@@ -5,3 +5,8 @@ export { default as RenipayLogo } from "./RenipayLogo";
 export { default as Search } from "./Search";
 export { default as Spinner } from "./Spinner";
 export { default as SuccessTick } from "./SuccessTick";
+export { default as ToastIconError } from "./ToastIconError";
+export { default as ToastIconInfo } from "./ToastIconInfo";
+export { default as ToastIconSuccess } from "./ToastIconSuccess";
+export { default as ToastIconWarning } from "./ToastIconWarning";
+export { default as VanillaX } from "./VanillaX";
