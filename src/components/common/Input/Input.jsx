@@ -58,7 +58,7 @@ const Input = ({
           // autoComplete={false}
           type={passwordShown ? "password" : "text"}
           className={classNames(
-            "font-normal w-full py-[10px] px-4 rounded-[8px] border-[1px]   outline-none   focus:border-[1px] border-gray-01 border-opacity-20 focus:border-primary-01  placeholder-gray-01 placeholder:text-h1 placeholder:font-light text-primary-01 bg-[#FFF] ",
+            "font-normal w-full py-[10px] px-4 rounded-[8px] border-[1px]   outline-none   focus:border-[1px] border-gray-01 border-opacity-20 focus:border-primary-01 text-h1  placeholder-gray-01 placeholder:text-h1 placeholder:font-light text-primary-01 bg-[#FFF] ",
             {
               "pr-10": showEyeIcon,
               "pl-14": showSearchIcon,

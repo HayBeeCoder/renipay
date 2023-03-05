@@ -1,8 +1,8 @@
 // import { Spinner } from "@app/components/Icon/icons";
 import classNames from "classnames";
 import React from "react";
-// import Spinner from "@app/components/Spinner";
-import Spinner from "@app/components/Icon/icons/Spinner";
+import Spinner from "@app/components/Spinner";
+// import Spinner from "@app/components/Icon/icons/Spinner";
 
 // variant = "standard" | "transparent" | "link"
 // size = "small" | "medium" | "large"
