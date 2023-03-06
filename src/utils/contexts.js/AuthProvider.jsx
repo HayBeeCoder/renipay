@@ -24,10 +24,7 @@ export { useAuthContext };
 //   const user =  await
 // }
 
-const causeLogout = {
-  NO_USER_FOUND,
-  INVALID_TOKEN,
-};
+const causeLogout = [NO_USER_FOUND, INVALID_TOKEN];
 
 const AuthProvider = ({ children, setIsLoadingUser }) => {
   const { pathname } = useLocation();
@@ -64,35 +61,10 @@ const AuthProvider = ({ children, setIsLoadingUser }) => {
 
   const login = useCallback(
     async (value) => {
-      // const data = await setTimeout(() => {}, 3000);
       const data = await logUserIn(value);
 
-      console.log({ data, token: data?.token });
-      // const { token } = data;
-      // const { isVerified, email } = data?.user;
       setToken(await data?.token);
-      // delete data?.token;
 
-      // const authResponse = await signInWithCustomToken(auth, token);
-      // const { idToken, refreshToken } = authResponse?._tokenResponse;
-      // // console.log({ authResponse });
-      // storage.set("id", authResponse?.user?.uid);
-      // storage.set("type", type);
-      // if (!isVerified) {
-      //   toast.info(
-      //     <Toast
-      //       message="You need to verify your email account before logging in."
-      //       toastType="info"
-      //     />,
-      //     {
-      //       toastId: "toast-need-to-verify",
-      //     }
-      //   );
-      //   navigate("/auth/verify");
-      // } else {
-      // storage.setToken(idToken);
-      // storage.set("ref_", refreshToken);
-      // storage.clear("id");
       setUser(data);
 
       toast.success(
@@ -105,9 +77,6 @@ const AuthProvider = ({ children, setIsLoadingUser }) => {
           toastId: "toast-successful-login",
         }
       );
-      // sendAnalyticsToFirebase("login");
-
-      // console.log({ location });
       navigate(location, { replace: true });
     },
 
@@ -150,11 +119,14 @@ const AuthProvider = ({ children, setIsLoadingUser }) => {
           // if (pathname === "/") {
           navigate("/profile");
           // }
-        } else logout();
+        } else if (!pathname.startsWith("/auth/signup")) logout();
       } catch (error) {
         // alert("ki");
         // if (error?.response?.data?.message === INVALID_AUTH_MESSAGE) logout();
-        if (causeLogout[error?.response?.data]) logout();
+        console.log({ pathname });
+        if (causeLogout.includes(error?.response?.data)) {
+          logout();
+        }
         console.log("error in getting user's profile:", error);
       }
       setIsLoadingUser(false);
