@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "./utils/contexts.js/AuthProvider";
-import GlobalStateProvider from "./utils/contexts.js/GlobalStateProvider";
 
 // import "react-toastify/dist/ReactToastify.css";
 import { Profile, Signin, Signup } from "./views";
@@ -64,106 +63,63 @@ const contextClass = {
 
 function App() {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
-  // const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  // const [, setShowModal] = useState(false);
-  // const [isSidebarCollapsed, setIsSidebarCollapsed] = useLocalStorage(
-  //   "isSidebarCollapsed",
-  //   false
-  // );
-  // const []
-  // const [notifications] = useState([
-  //   {
-  //     title:
-  //       "Rewatch your favourite movies and kindly make a subscription to keep enjoying them.",
-  //     time: "1 week ago",
-  //     image:
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSIWV_rV2LTDtBSxx8kSla05jpHywafXPObg&usqp=CAU",
-  //   },
-  //   {
-  //     title:
-  //       "Rewatch your favourite movies and kindly make a subscription to keep enjoying them.",
-  //     time: "1 week ago",
-  //     image:
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSIWV_rV2LTDtBSxx8kSla05jpHywafXPObg&usqp=CAU",
-  //   },
-  //   {
-  //     image:
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSIWV_rV2LTDtBSxx8kSla05jpHywafXPObg&usqp=CAU",
-  //     title:
-  //       "Rewatch your favourite movies and kindly make a subscription to keep enjoying them.",
-  //     time: "1 week ago",
-  //   },
-  //   {
-  //     title:
-  //       "Rewatch your favourite movies and kindly make a subscription to keep enjoying them.",
-  //     time: "1 week ago",
-  //     image:
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSIWV_rV2LTDtBSxx8kSla05jpHywafXPObg&usqp=CAU",
-  //   },
-  // ]);
-  // const location = useLocation();
-  // const state = location.state;
 
   // )
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider setIsLoadingUser={setIsLoadingUser}>
-        <GlobalStateProvider>
-          <Routes>
-            {/* <Route path="/" >
-              <Ro
-            </Route> */}
-            <Route
-              path="/auth"
-              element={<Navigate to="/auth/signup" replace />}
-            />
-            <Route path="/auth/signup" element={<Signup />} />
-            <Route path="/auth/signin" element={<Signin />} />
-            <Route
-              path="/profile"
-              element={
-                <PrivateRoute
-                  component={Profile}
-                  isLoadingUser={isLoadingUser}
-                j/>
-              }
-            />
-          </Routes>
-
-          <ToastContainer
-            limit={3}
-            position="top-right"
-            autoClose={1500}
-            hideProgressBar
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-            icon={false}
-            toastClassName={({ type }) =>
-              classNames(
-                contextClass[type || "default"],
-                " rounded-[4px] border-[1px] h-max relative flex "
-              )
-            }
-            closeButton={({ type, closeToast }) => (
-              <span
-                onClick={closeToast}
-                className={classNames("h-2 w-2 flex-shrink-0 p-2 mr-3", {
-                  "text-primary-05": type === "error",
-                  "text-[#1CCB57]": type === "success",
-                  "text-[#FAC91C]": type === "warning",
-                  "text-[#65B7E9]": type === "info",
-                })}
-              >
-                <VanillaX className="w-3 h-3" />
-              </span>
-            )}
+        <Routes>
+          <Route
+            path="/auth"
+            element={<Navigate to="/auth/signup" replace />}
           />
-        </GlobalStateProvider>
+          <Route path="/auth/signup" element={<Signup />} />
+          <Route path="/auth/signin" element={<Signin />} />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute
+                component={Profile}
+                isLoadingUser={isLoadingUser}
+                j
+              />
+            }
+          />
+        </Routes>
+
+        <ToastContainer
+          limit={3}
+          position="top-right"
+          autoClose={1500}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          icon={false}
+          toastClassName={({ type }) =>
+            classNames(
+              contextClass[type || "default"],
+              " rounded-[4px] border-[1px] h-max relative flex "
+            )
+          }
+          closeButton={({ type, closeToast }) => (
+            <span
+              onClick={closeToast}
+              className={classNames("h-2 w-2 flex-shrink-0 p-2 mr-3", {
+                "text-primary-05": type === "error",
+                "text-[#1CCB57]": type === "success",
+                "text-[#FAC91C]": type === "warning",
+                "text-[#65B7E9]": type === "info",
+              })}
+            >
+              <VanillaX className="w-3 h-3" />
+            </span>
+          )}
+        />
       </AuthProvider>
     </QueryClientProvider>
   );
