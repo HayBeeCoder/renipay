@@ -13,7 +13,6 @@ import {
   INVALID_TOKEN,
 } from "@app/constants";
 import { getUser, logUserIn } from "@app/api/auth";
-import { useGlobalStateContext } from "./GlobalStateProvider";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const [AuthContext, useAuthContext] = createFactory();
