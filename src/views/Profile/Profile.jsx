@@ -1,41 +1,95 @@
 import Button from "@app/components/common/Button";
 import Input from "@app/components/common/Input";
 import Skeleton from "@app/components/common/Skeleton";
+import {
+  Copy,
+  Exit,
+  Padlock,
+  Pencil,
+  Placeholder,
+  PlaceholderNoSpace,
+  Settings,
+} from "@app/components/Icon/icons";
 import capitalize from "@app/helpers/capitalize";
 import { useAuthContext } from "@app/utils/contexts.js/AuthProvider";
-import React from "react";
+import useCopyToClipboard from "@app/utils/hooks/useCopyClipboard";
+import classNames from "classnames";
+import React, { useState } from "react";
+
+const options = [
+  {
+    Icon: Padlock,
+    option: "Privacy and Security",
+  },
+  {
+    Icon: Pencil,
+    option: "Edit beneficiaries",
+  },
+  {
+    Icon: Placeholder,
+    option: "Customer Care",
+  },
+  {
+    Icon: Settings,
+    option: "Settings",
+  },
+];
 
 const Profile = ({ isLoadingUser }) => {
+  const { logout } = useAuthContext();
+  const [copied, setCopied] = useState(false);
+  const [value, setValue] = useState("renipay.onrender.com/payment/abass");
+  const [copiedText, copy] = useCopyToClipboard();
   const { user } = useAuthContext();
-  const value = "renipay.onrender.com/payment/abass";
 
-  console.log({ user });
+  const handleLinkCopy = () => {
+    copy(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   return (
-    <div className="my-6">
-      <section className="p-4 rounded-md shadow-sm max-w-3xl mx-auto">
-        <span className="w-20 bg-success h-20 rounded-full"></span>
-        <div>
-          {isLoadingUser ? (
-            <Skeleton width={200} height={80} />
-          ) : (
-            <>
-              <p>
-                {capitalize(user?.first_name) +
-                  " " +
-                  capitalize(user?.last_name)}
-              </p>
-              <div className="flex gap-4 items-stretch">
-                <Input
-                  placeholder="renipay"
-                  value={value}
-                  disabled={true}
-                  inputClassName="w-52"
-                  // className="w-52"
-                />
-                <span className="w-9 h-9 inline-block bg-primary-01 rounded-[4px]"></span>
-              </div>
-            </>
-          )}
+    <div className="py-6 space-y-8 min-h-screen ">
+      <section className="w-11/12 p-4 rounded-md shadow-[0px_2px_2px_rgba(0,0,0,0.15)] max-w-3xl mx-auto flex gap-8  justify-between md:flex-col  items-end">
+        <div className="flex gap-8 items-center ">
+          {
+            <span className="inline-block w-20 p-6 bg-neutral-01 h-20 rounded-full text-h6">
+              <Placeholder />
+            </span>
+          }
+          <div>
+            {isLoadingUser || !user?.first_name ? (
+              <Skeleton width={280} height={80} />
+            ) : (
+              <>
+                <p className="text-h2">
+                  {capitalize(user?.first_name) +
+                    " " +
+                    capitalize(user?.last_name)}
+                </p>
+                <div className="flex gap-4 items-center">
+                  <Input
+                    placeholder="renipay"
+                    value={value}
+                    disabled={true}
+                    inputClassName="w-52"
+                    // className="w-52"
+                  />
+                  <button
+                    className={classNames(
+                      "w-9 h-9 inline-block bg-primary-01 rounded-[4px] p-2 text-[#fff]",
+                      {
+                        "text-h1 min-w-9 w-max": copied,
+                      }
+                    )}
+                    disabled={isLoadingUser}
+                    onClick={handleLinkCopy}
+                  >
+                    {copied ? "Copied!" : <Copy />}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <Button
           letterCase="capitalize"
@@ -48,7 +102,37 @@ const Profile = ({ isLoadingUser }) => {
           Edit my profile
         </Button>
       </section>
-      Profile
+      <section className="w-11/12 mx-auto bg-primary-01 rounded-md text-[#fff] max-w-md p-8">
+        <p className="uppercase text-h2 font-semibold my-3">Current Balance</p>
+        <p className="font-bold text-h4">
+          N <span className="text-h7">{user?.balance}</span>
+        </p>
+      </section>
+
+      <ul className="grid md:block grid-cols-2  gap-3 w-11/12 max-w-3xl mx-auto">
+        {options.map(({ Icon, option }) => (
+          <li className="flex md:flex-row flex-col items-center gap-3 md:bg-transparent bg-neutral-02 md:p-2 md:my-3 p-6 rounded-[4px] cursor-pointer  hover:bg-primary-01 hover:text-[#fff] group">
+            <span className="inline-block w-10 h-10  p-2 rounded-full bg-primary-01/30 text-primary-01 group-hover:text-[#fff] group-hover:border-[1px] group-hover:border-[#fff]">
+              <Icon />
+            </span>
+            <span className="text-h2 text-[#121212] group-hover:text-[#fff]">
+              {option}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <div className="w-11/12 max-w-3xl mx-auto md:pt-12 pt-36">
+        <Button
+          icon={Exit}
+          iconPosition="left"
+          buttonTextClassName="text-primary-01"
+          tintButtonBg
+          className=""
+          onClick={logout}
+        >
+          Logout
+        </Button>
+      </div>
     </div>
   );
 };
