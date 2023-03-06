@@ -16,9 +16,11 @@ const REGISTER = "register";
 const RESET = "reset";
 const SERIES = "series";
 const MAX_MOBILE_WIDTH = 767;
+const NO_USER_FOUND = "User not found!";
 
 const MOVIE = "movie";
 const FULLMOVIE = "fullMovie";
+const INVALID_TOKEN = "Invalid Token";
 export {
   USER_ALREADY_EXISTS,
   MAX_MOBILE_WIDTH,
@@ -33,4 +35,6 @@ export {
   REGEX_ALPHANUMERIC_AT_LEAST_ONE_SYMBOL_AND_UPPERCASE,
   MOVIE,
   FULLMOVIE,
+  NO_USER_FOUND,
+  INVALID_TOKEN,
 };
