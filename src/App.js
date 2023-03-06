@@ -17,6 +17,7 @@ import { Profile, Signin, Signup } from "./views";
 import { VanillaX } from "./components/Icon/icons";
 import { QueryClient, QueryClientProvider } from "react-query";
 import PrivateRoute from "./components/PrivateRoute";
+import { useState } from "react";
 // import AuthProvider from "./utils/contexts.js/AuthProvider";
 // import PrivateRoute from "./components/common/PrivateRoute";
 // import { DashboardLayout } from "./layouts";
@@ -62,6 +63,7 @@ const contextClass = {
 };
 
 function App() {
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
   // const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   // const [, setShowModal] = useState(false);
   // const [isSidebarCollapsed, setIsSidebarCollapsed] = useLocalStorage(
@@ -105,7 +107,7 @@ function App() {
   // )
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
+      <AuthProvider setIsLoadingUser={setIsLoadingUser}>
         <GlobalStateProvider>
           <Routes>
             {/* <Route path="/" >
@@ -117,7 +119,15 @@ function App() {
             />
             <Route path="/auth/signup" element={<Signup />} />
             <Route path="/auth/signin" element={<Signin />} />
-            <Route path="/profile" element={<PrivateRoute  component={Profile}/>}/>
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute
+                  component={Profile}
+                  isLoadingUser={isLoadingUser}
+                j/>
+              }
+            />
           </Routes>
 
           <ToastContainer

@@ -4,9 +4,7 @@ import { storage } from "@app/utils";
 import axios from "axios";
 
 import { toast } from "react-toastify";
-import {
-  INVALID_AUTH_MESSAGE
-} from "@app/constants";
+import { INVALID_AUTH_MESSAGE, INVALID_TOKEN, NO_USER_FOUND } from "@app/constants";
 // import { auth } from "@app/config/firebase.config";
 // import jwt from "jsonwebtoken";
 // import client from "jwks-rsa";
@@ -55,8 +53,7 @@ async function authRequestInterceptor(request) {
   // console.log({ refresh_token });
   if (refresh_token) {
     try {
-      var res = await axiosInstance("/auth"
-      );
+      var res = await axiosInstance("/auth");
       // console.log({ res });
     } catch (e) {
       console.log({ e });
@@ -76,7 +73,7 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     console.log({ error });
-    // if (          
+    // if (
     //   error?.response?.data?.error?.code === 400 ||
     //   error?.response?.data?.error?.message === "INVALID_REFRESH_TOKEN"
     // ) {
@@ -171,7 +168,7 @@ const withAbort = (fn) => {
         //     statusCode: 200,
         //   };
         // } else {
-          err = error_response;
+        err = error_response;
         // }
       } else if (error?.message) {
         // if (error?.message === INVALID_AUTH_MESSAGE) {
@@ -187,9 +184,14 @@ const withAbort = (fn) => {
       if (didAbort(error)) {
         error.aborted = true;
       }
-      toast.error(<Toast toastType="error" message={err} data-testid="toast-error" />, {
-        toastId: `toast-api-error`,
-      });
+      if (err !== NO_USER_FOUND || err !== INVALID_TOKEN) {
+        toast.error(
+          <Toast toastType="error" message={err} data-testid="toast-error" />,
+          {
+            toastId: `toast-api-error`,
+          }
+        );
+      }
 
       if (error?.message.toLowerCase() === "network error") return error;
       throw error;
