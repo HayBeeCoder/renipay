@@ -21,6 +21,7 @@ const Button = ({
   type = "button",
   theme = "purple",
   buttonTextClassName,
+  tintButtonBg,
   ...props
 }) => {
   return (
@@ -33,25 +34,25 @@ const Button = ({
           " py-[16px] px-4": size === "large",
           "font-semibold": size !== "small",
           "flex items-center gap-2": Icon,
-          "border-[1px] border-primary-05":
-            (variant === "standard" || variant === "transparent") &&
-            theme === "red",
-          "border-[1px] border-[#fff]":
-            theme === "white" && variant === "transparent",
+          // "border-[1px] border-primary-05":
+          // (variant === "standard" || variant === "transparent") &&
+          // theme === "red",
+          // "border-[1px] border-[#fff]":
+          //   theme === "white" && variant === "transparent",
 
           // "bg-primary-01 text-[#ffffff] hover:bg-primary-04 active:bg-primary-06":
           //   variant === "standard" && !disabled,
-          " text-[#fff]": variant === "transparent" && !disabled,
-
-          "border-black-03 text-black-03":
-            variant === "transparent" && disabled,
+          // " text-[#fff]": variant === "transparent" && !disabled,
+          // "border-black-03 text-black-03":
+          // variant === "transparent" && disabled,
           "bg-primary-01 text-[#ffffff] hover:bg-opacity-80   active:border-primary-04 active:bg-primary-04":
             theme === "purple" && variant !== "link",
           //  &"border-[#fff] text-[#fff]  ": theme === "white" && disable,
-          "border-none hover:underline p-2 hover:bg-transparent active:bg-transparent hover:underline-offset-4 bg-transparent text-primary-05":
-            variant === "link",
+          // "border-none hover:underline p-2 hover:bg-transparent active:bg-transparent hover:underline-offset-4 bg-transparent text-primary-05":
+          // variant === "link",
           "bg-black-03 text-[#ffffff] hover:bg-black-03 border-black-03":
             variant === "standard" && disabled,
+          "bg-opacity-30 text-primary-01 hover:text-[#fff]": tintButtonBg,
         },
         className
       )}
@@ -70,6 +71,7 @@ const Button = ({
             </span>
           )}
           <span
+            style={{ color: "inherit" }}
             className={classNames(
               "font-poppins font-medium ",
               {
