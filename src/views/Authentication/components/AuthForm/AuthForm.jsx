@@ -4,6 +4,7 @@ import RenipayLogo from "@app/components/Icon/icons/RenipayLogo";
 import Layout from "@app/views/Authentication/Layout";
 import classNames from "classnames";
 import React, { useMemo } from "react";
+import { Link } from "react-router-dom";
 
 // const SOCIAL_ICONS = [
 //   {
@@ -55,14 +56,16 @@ const AuthForm = ({
         className="py-7 px-5 rounded-[4px] space-y-1 w-[389px] md:w-[95vw] md:max-w-[400px] mx-auto text-center"
       >
         <div className="flex justify-center">
-          <span className=" aspect-square">
-            <RenipayLogo
-              className={classNames("ml-0 ", {
-                "md:hidden": nonAuth,
-              })}
-              // hide={false}
-            />
-          </span>
+          <Link to="/">
+            <span className=" aspect-square">
+              <RenipayLogo
+                className={classNames("ml-0 ", {
+                  "md:hidden": nonAuth,
+                })}
+                // hide={false}
+              />
+            </span>
+          </Link>
         </div>
 
         {Icon && (
