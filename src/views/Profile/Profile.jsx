@@ -10,6 +10,7 @@ import {
   PlaceholderNoSpace,
   Settings,
 } from "@app/components/Icon/icons";
+import { PAYMENT_LINK } from "@app/constants";
 import capitalize from "@app/helpers/capitalize";
 import { useAuthContext } from "@app/utils/contexts.js/AuthProvider";
 import useCopyToClipboard from "@app/utils/hooks/useCopyClipboard";
@@ -69,7 +70,7 @@ const Profile = ({ isLoadingUser }) => {
                 <div className="flex gap-4 items-center">
                   <Input
                     placeholder="renipay"
-                    value={value}
+                    value={PAYMENT_LINK + user?.username}
                     disabled={true}
                     inputClassName="w-52"
                     // className="w-52"
@@ -104,9 +105,13 @@ const Profile = ({ isLoadingUser }) => {
       </section>
       <section className="w-11/12 mx-auto bg-primary-01 rounded-md text-[#fff] max-w-md p-8">
         <p className="uppercase text-h2 font-semibold my-3">Current Balance</p>
-        <p className="font-bold text-h4">
-          N {isLoadingUser ? <Skeleton width={100} height={40}/> : <span className="text-h7">{user?.balance}</span>}
-        </p>
+        {isLoadingUser ? (
+          <Skeleton width={100} height={40} />
+        ) : (
+          <p className="font-bold text-h4">
+            N <span className="text-h7">{user?.balance}</span>
+          </p>
+        )}
       </section>
 
       <ul className="grid md:block grid-cols-2  gap-3 w-11/12 max-w-3xl mx-auto">

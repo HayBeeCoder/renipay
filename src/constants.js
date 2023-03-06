@@ -21,6 +21,7 @@ const NO_USER_FOUND = "User not found!";
 const MOVIE = "movie";
 const FULLMOVIE = "fullMovie";
 const INVALID_TOKEN = "Invalid Token";
+const PAYMENT_LINK = "renipay.onrender.com/"
 export {
   USER_ALREADY_EXISTS,
   MAX_MOBILE_WIDTH,
@@ -37,4 +38,5 @@ export {
   FULLMOVIE,
   NO_USER_FOUND,
   INVALID_TOKEN,
+  PAYMENT_LINK
 };
