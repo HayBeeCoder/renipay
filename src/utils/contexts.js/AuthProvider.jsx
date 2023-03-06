@@ -7,29 +7,46 @@ import Toast from "@app/components/common/Toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useQueryClient } from "react-query";
-import { INVALID_AUTH_MESSAGE } from "@app/constants";
-import { logUserIn } from "@app/api/auth";
+import {
+  INVALID_AUTH_MESSAGE,
+  NO_USER_FOUND,
+  INVALID_TOKEN,
+} from "@app/constants";
+import { getUser, logUserIn } from "@app/api/auth";
+import { useGlobalStateContext } from "./GlobalStateProvider";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const [AuthContext, useAuthContext] = createFactory();
 
 export { useAuthContext };
 
-const AuthProvider = ({ children }) => {
+// const getUser = async () {
+//   const user =  await
+// }
+
+const causeLogout = {
+  NO_USER_FOUND,
+  INVALID_TOKEN,
+};
+
+const AuthProvider = ({ children, setIsLoadingUser }) => {
   const { pathname } = useLocation();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [location, setLocation] = useState("/");
+  const [, setToken] = useLocalStorage("token");
+  // const { setGlobalState } = useGlobalStateContext();
   const [user, setUser] = useState(() => {
     const token = storage.getToken();
-    // const email = storage.get("email");
+    // // const email = storage.get("email");
+    if (token) return {};
+    // const isValid = token;
+    // // const isValid = token && email;
 
-    const isValid = token;
-    // const isValid = token && email;
-
-    if (isValid) {
-      return { token };
-      // return { token, email };
-    }
+    // if (isValid) {
+    //   return { token };
+    //   // return { token, email };
+    // }
 
     return null;
   });
@@ -47,14 +64,14 @@ const AuthProvider = ({ children }) => {
 
   const login = useCallback(
     async (value) => {
-      console.log({ value });
       // const data = await setTimeout(() => {}, 3000);
       const data = await logUserIn(value);
 
+      console.log({ data, token: data?.token });
       // const { token } = data;
       // const { isVerified, email } = data?.user;
-      storage.setToken(data?.token);
-      delete data?.token;
+      setToken(await data?.token);
+      // delete data?.token;
 
       // const authResponse = await signInWithCustomToken(auth, token);
       // const { idToken, refreshToken } = authResponse?._tokenResponse;
@@ -96,7 +113,7 @@ const AuthProvider = ({ children }) => {
 
     // save to in app memory , when refreshed saved local data is retrieved
     // else log user out
-    [location, navigate]
+    [location, navigate, setToken]
   );
 
   const logout = useCallback(() => {
@@ -119,25 +136,30 @@ const AuthProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    // const token = storage.getToken()
-    //   .then((data) => {
-    //     if (!data?.isVerified) {
-    //       navigate("/auth/verify");
-    //     } else {
-    //       setUser(data);
-    //     }
-    //   })
-    //   .
+    // console.log({ "pathname.includes('auth')": pathname.includes("auth") });
     // if (!pathname.includes("auth")) {
-    // getUserProfile()
-    try {
-      const token = storage.getToken();
-      setUser({ token });
-    } catch (error) {
-      if (error?.response?.data?.message === INVALID_AUTH_MESSAGE) logout();
-      console.log("error in getting user's profile:", error);
-    }
-  }, [logout, navigate, pathname]);
+    (async function () {
+      try {
+        if (storage.getToken()) {
+          setIsLoadingUser(true);
+
+          const user = await getUser(storage.getToken());
+
+          setUser(user);
+          console.log({ user });
+          // if (pathname === "/") {
+          navigate("/profile");
+          // }
+        } else logout();
+      } catch (error) {
+        // alert("ki");
+        // if (error?.response?.data?.message === INVALID_AUTH_MESSAGE) logout();
+        if (causeLogout[error?.response?.data]) logout();
+        console.log("error in getting user's profile:", error);
+      }
+      setIsLoadingUser(false);
+    })();
+  }, [logout, navigate, pathname, setIsLoadingUser]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
