@@ -125,11 +125,11 @@ const Signin = () => {
           <span>Remember Me?</span>
         </label> */}
 
-        <Link to="/auth/forgot">
+        {/* <Link to="/auth/forgot">
           <span className="hover:underline hover:underline-offset-2 text-[#fff] text-[10px]">
             Forgot Password?
-          </span>
-        </Link>
+          </span> */}
+        {/* </Link> */}
       </div>
     </AuthForm>
   );
