@@ -44,10 +44,11 @@ const Profile = ({ isLoadingUser }) => {
   const { user } = useAuthContext();
 
   const handleLinkCopy = () => {
-    copy(value);
+    copy(PAYMENT_LINK + user?.username);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+  console.log({ user });
   return (
     <div className="py-6 space-y-8 min-h-screen ">
       <section className="w-11/12 p-4 rounded-md shadow-[0px_2px_2px_rgba(0,0,0,0.15)] max-w-3xl mx-auto flex gap-8  justify-between md:flex-col  items-end">
