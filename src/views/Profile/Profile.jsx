@@ -2,6 +2,7 @@ import Button from "@app/components/common/Button";
 import Input from "@app/components/common/Input";
 import Skeleton from "@app/components/common/Skeleton";
 import {
+  Board,
   Copy,
   Exit,
   Padlock,
@@ -9,6 +10,7 @@ import {
   Placeholder,
   PlaceholderNoSpace,
   Settings,
+  UpwardArrow,
 } from "@app/components/Icon/icons";
 import { PAYMENT_LINK } from "@app/constants";
 import capitalize from "@app/helpers/capitalize";
@@ -16,27 +18,38 @@ import { useAuthContext } from "@app/utils/contexts.js/AuthProvider";
 import useCopyToClipboard from "@app/utils/hooks/useCopyClipboard";
 import classNames from "classnames";
 import React, { useState } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const options = [
   {
-    Icon: Padlock,
-    option: "Privacy and Security",
+    Icon: UpwardArrow,
+    option: "Transactions History",
+    link: "/profile/transactions",
   },
+  // {
+  //   Icon: Padlock,
+  //   option: "Privacy and Security",
+  // },
   {
     Icon: Pencil,
     option: "Edit beneficiaries",
+    link: "/profile",
   },
   {
     Icon: Placeholder,
     option: "Customer Care",
+    link: "/profile",
   },
   {
     Icon: Settings,
     option: "Settings",
+    link: "/profile",
   },
 ];
 
 const Profile = ({ isLoadingUser }) => {
+  const { pathname } = useLocation();
+
   const { logout } = useAuthContext();
   const [copied, setCopied] = useState(false);
   const [value, setValue] = useState("renipay.onrender.com/payment/abass");
@@ -114,19 +127,25 @@ const Profile = ({ isLoadingUser }) => {
           </p>
         )}
       </section>
-
-      <ul className="grid md:block grid-cols-2  gap-3 w-11/12 max-w-3xl mx-auto">
-        {options.map(({ Icon, option }) => (
-          <li className="flex md:flex-row flex-col items-center gap-3 md:bg-transparent bg-neutral-02 md:p-2 md:my-3 p-6 rounded-[4px] cursor-pointer  hover:bg-primary-01 hover:text-[#fff] group">
-            <span className="inline-block w-10 h-10  p-2 rounded-full bg-primary-01/30 text-primary-01 group-hover:text-[#fff] group-hover:border-[1px] group-hover:border-[#fff]">
-              <Icon />
-            </span>
-            <span className="text-h2 text-[#121212] group-hover:text-[#fff]">
-              {option}
-            </span>
-          </li>
-        ))}
-      </ul>
+      {pathname === "/profile" && (
+        <ul className="grid md:block grid-cols-2  gap-3 w-11/12 max-w-3xl mx-auto">
+          {options.map(({ Icon, option, link }) => (
+            <Link to={link}>
+              <li className="flex md:flex-row flex-col items-center gap-3 md:bg-transparent bg-neutral-02 md:p-2 md:my-3 p-6 rounded-[4px] cursor-pointer  hover:bg-primary-01 hover:text-[#fff] group">
+                <span className="inline-block w-10 h-10  p-2 rounded-full bg-primary-01/30 text-primary-01 group-hover:text-[#fff] group-hover:border-[1px] group-hover:border-[#fff]">
+                  <Icon />
+                </span>
+                <span className="text-h2 text-[#121212] group-hover:text-[#fff]">
+                  {option}
+                </span>
+              </li>
+            </Link>
+          ))}
+        </ul>
+      )}
+      <div className="w-11/12 max-w-2xl mx-auto">
+        <Outlet />
+      </div>
       <div className="w-11/12 max-w-3xl mx-auto md:pt-12 pt-36">
         <Button
           icon={Exit}
