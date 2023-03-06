@@ -1,8 +1,15 @@
+export { default as Copy } from "./Copy";
 export { default as ErrorX } from "./ErrorX";
+export { default as Exit } from "./Exit";
 export { default as EyesClosed } from "./EyesClosed";
 export { default as Eyes } from "./Eyes";
+export { default as Padlock } from "./Padlock";
+export { default as Pencil } from "./Pencil";
+export { default as Placeholder } from "./Placeholder";
+export { default as PlaceholderNoSpace } from "./PlaceholderNoSpace";
 export { default as RenipayLogo } from "./RenipayLogo";
 export { default as Search } from "./Search";
+export { default as Settings } from "./Settings";
 export { default as Spinner } from "./Spinner";
 export { default as SuccessTick } from "./SuccessTick";
 export { default as ToastIconError } from "./ToastIconError";
