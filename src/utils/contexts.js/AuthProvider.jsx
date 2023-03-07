@@ -115,9 +115,9 @@ const AuthProvider = ({ children, setIsLoadingUser }) => {
 
           setUser(user);
           // console.log({ user });
-          // if (pathname === "/") {
-          // navigate("/profile");
-          // }
+          if (pathname === "/") {
+            navigate("/profile");
+          }
         } else if (!pathname.startsWith("/auth/signup")) logout();
       } catch (error) {
         // alert("ki");
