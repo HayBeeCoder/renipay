@@ -6,7 +6,7 @@ const TableBodyPlaceholder = ({ children, position = "center" }) => {
   return (
     <div
       className={classNames(
-        "w-[100%] h-16 flex justify-center items-center absolute top-full -translate-y-full",
+        "w-[100%] h-16 flex justify-center items-center absolute top-full ",
         { "justify-start": position === "start" }
       )}
     >
