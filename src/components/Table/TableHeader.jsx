@@ -13,7 +13,7 @@ const TableHeader = (props) => {
         {data.map((item) => (
           <th
             className={classNames(
-              "text-[#161B25]",
+              "text-primary-01/90" ,
               {
                 // `${item[2]}`: item[2],
                 "w-[calc(1/20*100%)]": item.fraction === "oneth_twenty",

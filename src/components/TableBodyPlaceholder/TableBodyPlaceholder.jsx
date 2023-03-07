@@ -1,9 +1,15 @@
+import classNames from "classnames";
 import React from "react";
 // import Spinner from '../Spinner'
 
-const TableBodyPlaceholder = ({ children}) => {
+const TableBodyPlaceholder = ({ children, position = "center" }) => {
   return (
-    <div className="w-[100%] h-16 flex justify-center items-center absolute top-full">
+    <div
+      className={classNames(
+        "w-[100%] h-16 flex justify-center items-center absolute top-full -translate-y-full",
+        { "justify-start": position === "start" }
+      )}
+    >
       {children}
     </div>
   );

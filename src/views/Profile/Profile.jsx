@@ -5,6 +5,7 @@ import {
   Board,
   Copy,
   Exit,
+  InclinedLeftRightArrow,
   Padlock,
   Pencil,
   Placeholder,
@@ -22,7 +23,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 const options = [
   {
-    Icon: UpwardArrow,
+    Icon: InclinedLeftRightArrow,
     option: "Transactions History",
     link: "/profile/transactions",
   },
@@ -143,7 +144,7 @@ const Profile = ({ isLoadingUser }) => {
           ))}
         </ul>
       )}
-      <div className="w-11/12 max-w-2xl mx-auto">
+      <div className="w-[95%] max-w-3xl mx-auto">
         <Outlet />
       </div>
       <div className="w-11/12 max-w-3xl mx-auto md:pt-12 pt-36">

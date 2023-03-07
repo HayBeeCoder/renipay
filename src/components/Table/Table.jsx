@@ -3,18 +3,27 @@ import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import Spinner from "@app/components/Spinner";
 import TableBodyPlaceholder from "@app/components/TableBodyPlaceholder";
+import classNames from "classnames";
 
-const Table = ({ children, emptyTableText, isLoading }) => {
+const Table = ({ children, emptyTableText, isLoading, spinPosition }) => {
   return (
-    <table className="w-full relative min-w-[300px]">
+    <table
+      className={classNames("w-full relative min-w-[300px] h-max", {
+        "h-[100px]": isLoading,
+      })}
+    >
       {/* <tableHeader data={tableHeader} />
        */}
+
       {React.Children.toArray(children)?.map((item, index) => {
         if (index === 1 && isLoading) {
           return (
-            <TableBodyPlaceholder>
-              <Spinner color="dark" show />
-            </TableBodyPlaceholder>
+            <>
+              <div className="my-2 hidden md:block">Loading...</div>
+              <TableBodyPlaceholder position={spinPosition}>
+                <Spinner color="dark" show />
+              </TableBodyPlaceholder>
+            </>
           );
         }
         if (index === 1 && emptyTableText) {
