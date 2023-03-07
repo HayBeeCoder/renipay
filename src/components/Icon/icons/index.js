@@ -1,9 +1,11 @@
+export { default as ArrrowLeft } from "./ArrrowLeft";
 export { default as Board } from "./Board";
 export { default as Copy } from "./Copy";
 export { default as ErrorX } from "./ErrorX";
 export { default as Exit } from "./Exit";
 export { default as EyesClosed } from "./EyesClosed";
 export { default as Eyes } from "./Eyes";
+export { default as InclinedLeftRightArrow } from "./InclinedLeftRightArrow";
 export { default as Padlock } from "./Padlock";
 export { default as Pencil } from "./Pencil";
 export { default as Placeholder } from "./Placeholder";
