@@ -11,12 +11,14 @@ const SIZES = {
 // show: Boolean
 // size?: keyof typeof SIZES
 // }
-const Spinner = ({ show, size = "md" }) => {
+const Spinner = ({ show, size = "md", color }) => {
   // const { size = 'md' } = props
   return show ? (
     <div className="inline-block text-[">
       <svg
-        className={classNames("animate-spin text-primary-01", SIZES[size])}
+        className={classNames("animate-spin text-[#fff]", SIZES[size], {
+          "text-primary-01": color === "dark",
+        })}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
