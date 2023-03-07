@@ -16,7 +16,7 @@ const Spinner = ({ show, size = "md" }) => {
   return show ? (
     <div className="inline-block text-[">
       <svg
-        className={classNames("animate-spin text-[#ffffff]", SIZES[size])}
+        className={classNames("animate-spin text-primary-01", SIZES[size])}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
