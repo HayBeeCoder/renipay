@@ -48,8 +48,8 @@ const Button = ({
           "bg-primary-01 text-[#ffffff] hover:bg-opacity-80   active:border-primary-04 active:bg-primary-04":
             theme === "purple" && variant !== "link",
           //  &"border-[#fff] text-[#fff]  ": theme === "white" && disable,
-          // "border-none hover:underline p-2 hover:bg-transparent active:bg-transparent hover:underline-offset-4 bg-transparent text-primary-05":
-          // variant === "link",
+          "border-none hover:underline p-2 hover:bg-transparent active:bg-transparent hover:underline-offset-4 bg-transparent text-primary-01":
+            variant === "link",
           "bg-black-03 text-[#ffffff] hover:bg-black-03 border-black-03":
             variant === "standard" && disabled,
           "bg-opacity-30 text-primary-01 hover:text-[#fff]": tintButtonBg,
