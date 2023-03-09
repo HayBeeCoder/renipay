@@ -124,7 +124,7 @@ const Profile = ({ isLoadingUser }) => {
           <Skeleton width={100} height={40} />
         ) : (
           <p className="font-bold text-h4">
-            N <span className="text-h7">{user?.balance}</span>
+            $ <span className="text-h7 -mb-1">{user?.balance}</span>
           </p>
         )}
       </section>

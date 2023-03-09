@@ -86,7 +86,10 @@ function App() {
               />
             }
           >
-            <Route path="transactions" element={<Transactions />} />
+            <Route
+              path="transactions"
+              element={<Transactions isLoading={isLoadingUser} />}
+            />
           </Route>
         </Routes>
 

@@ -1,6 +1,7 @@
 import Button from "@app/components/common/Button";
 import { ArrrowLeft } from "@app/components/Icon/icons";
 import Table from "@app/components/Table";
+import { useAuthContext } from "@app/utils/contexts.js/AuthProvider";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 const name = "Sender's name";
 const description = "Description";
 const amount_received = "Amount Received";
+const dateReceived = "Date Received";
 
 const tableBody = [
   {
@@ -201,25 +203,30 @@ const tableHeader = [
   { name: name, fraction: "threeth" },
   { name: description, fraction: "seventh" },
   { name: amount_received, fraction: "twoth" },
+  { name: dateReceived, fraction: "threeth" },
 ];
 
 const Transactions = ({ isLoading }) => {
+  const { user } = useAuthContext();
   const SINGLE_STRETCH = 10;
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoadingTransactions(false);
-        setTransactions(tableBody.slice(0, SINGLE_STRETCH));
-    }, 2000);
+    if (!isLoading) {
+      setTransactions(user?.transactions?.slice(0, SINGLE_STRETCH));
+    }
+    // setTimeout(() => {
+    //   setIsLoadingTransactions(false);
+    //     setTransactions(tableBody.slice(0, SINGLE_STRETCH));
+    // }, 2000);
     return () => {};
-  }, []);
+  }, [isLoading, user?.transactions]);
 
   const handleShowMore = () => {
     setTransactions([
       ...transactions,
-      ...tableBody.slice(
+      ...user?.transactions?.slice(
         transactions.length,
         transactions.length + SINGLE_STRETCH
       ),
@@ -227,11 +234,11 @@ const Transactions = ({ isLoading }) => {
   };
   return (
     <div>
-        <Link to={"/profile"}>
-      <Button variant="link" icon={ArrrowLeft} iconPosition="left">
-        Back to Profile
-      </Button>
-        </Link>
+      <Link to={"/profile"}>
+        <Button variant="link" icon={ArrrowLeft} iconPosition="left">
+          Back to Profile
+        </Button>
+      </Link>
       <p className="font-semibold text-h3 text-primary-01">
         Transactions History
       </p>
@@ -240,9 +247,9 @@ const Transactions = ({ isLoading }) => {
         <div className="md:w-max md:max-w-3xl md:overflow-x-scroll h-max">
           <Table
             spinPosition={"start"}
-            isLoading={isLoading || isLoadingTransactions}
+            isLoading={isLoading}
             emptyTableText={
-              !!transactions?.length && !isLoadingTransactions
+              !!transactions?.length && !isLoading
                 ? null
                 : "There are no transactions yet!"
             }
@@ -257,11 +264,12 @@ const Transactions = ({ isLoading }) => {
                     })}
                   >
                     <td className="text-center">{index + 1}</td>
-                    <td>{item?.name}</td>
+                    <td>{item?.payer}</td>
                     <td className="multiline-ellipsis hover:overflow-visible hover:block hover:cursor-pointer py-1">
                       {item?.description}
                     </td>
-                    <td>{item?.amount_received}</td>
+                    <td>{item?.amount}</td>
+                    <td>{item?.createdAt}</td>
                   </tr>
                 </>
               ))}
