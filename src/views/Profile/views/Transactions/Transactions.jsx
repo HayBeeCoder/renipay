@@ -202,7 +202,7 @@ const tableHeader = [
   },
   { name: name, fraction: "threeth" },
   { name: description, fraction: "seventh" },
-  { name: amount_received, fraction: "twoth" },
+  { name: amount_received, fraction: "threeth" },
   { name: dateReceived, fraction: "threeth" },
 ];
 
